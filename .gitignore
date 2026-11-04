@@ -1,0 +1,28 @@
+# Visual Studio build/cache
+.vs/
+**/bin/
+**/obj/
+Debug/
+Release/
+TestResults/
+*.user
+*.suo
+*.cache
+*.log
+packages/
+# Secrets/private settings (keep templates if used)
+.env
+.env.*
+!*.example
+Web.Release.config
+*.publishsettings
+*.pubxml.user
+# IDE/OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+# Local development database files
+*.mdf
+*.ldf
+# EF auto-generated model files SHOULD be committed when source project is present.

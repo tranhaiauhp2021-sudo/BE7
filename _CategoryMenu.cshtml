@@ -1,0 +1,8 @@
+@model IEnumerable<MyStore.Models.Category>
+<div class="category-links">
+    <span class="nav-label">Danh mục:</span>
+    @foreach (var category in Model)
+    {
+        <a href="@Url.Action("ProductList", "Home", new { id = category.CategoryID })">@category.CategoryName</a>
+    }
+</div>

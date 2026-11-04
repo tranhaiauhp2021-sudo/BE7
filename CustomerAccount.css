@@ -1,0 +1,20 @@
+.account-page { padding: 55px 0 80px; display: flex; justify-content: center; }
+.account-card { width: min(470px,100%); border:1px solid var(--line); border-radius:4px;
+    background: #fff; padding: 34px clamp(20px, 4vw, 38px); box-shadow:0 12px 48px rgba(31,25,19,.045); }
+.account-card-wide { width: min(800px,100%); }
+.account-card h1 { font-weight: 550; font-size: 33px; margin: 7px 0 12px; }
+.account-intro { color:var(--muted); margin-bottom:28px; font-size:14px; }
+.account-form { display:flex; flex-direction:column; gap:17px; }
+.account-field-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.account-field { display:flex; flex-direction:column; gap:7px; }
+.account-field-full { grid-column:1/-1; }
+.account-field label {font-weight:600; font-size:13px;}
+.account-input { width:100%; border:1px solid #d9d4cf; padding:11px 12px;
+    font:inherit; border-radius:3px; outline:none; background:#fff; }
+.account-input:focus { border-color:var(--accent); box-shadow:0 0 0 2px rgba(163,107,77,.11); }
+.field-error,.validation-summary {color:#b34d41;font-size:12px;}
+.validation-summary ul {list-style:disc;padding-left:20px;margin:0;}
+.account-submit {margin-top:6px;padding:13px 20px; width:100%; font-weight:600;}
+.account-switch {text-align:center; margin:24px 0 0; font-size:13px; color:var(--muted);}
+.account-switch a {color:var(--accent);font-weight:650;text-decoration:underline;text-underline-offset:3px;}
+@media(max-width:650px){.account-page{padding:24px 0 44px}.account-field-grid{grid-template-columns:1fr}.account-field-full{grid-column:auto}}

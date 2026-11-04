@@ -1,0 +1,21 @@
+@model MyStore.Models.ViewModel.ProductDetailVM
+@using PagedList.Mvc
+<section class="product-section">
+    <div class="section-heading"><div><p class="eyebrow">TOP DEALS</p><h2>Sản phẩm bán chạy cùng danh mục</h2></div></div>
+    @if (Model.PagedTopProducts.Count == 0)
+    {
+        <p class="empty-message">Chưa có dữ liệu Top Deals.</p>
+    }
+    else
+    {
+        <div class="product-grid">
+            @foreach (var product in Model.PagedTopProducts)
+            {
+                @Html.Partial("~/Views/Shared/_ProductCard.cshtml", product)
+            }
+        </div>
+        <div class="pagination">
+            @Html.PagedListPager(Model.PagedTopProducts, page => Url.Action("ProductDetail", "Home", new { id = Model.Product.ProductID, page }))
+        </div>
+    }
+</section>

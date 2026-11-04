@@ -1,0 +1,17 @@
+@model MyStore.Models.ViewModel.HomeProductVM
+<section class="product-section">
+    <div class="section-heading"><div><p class="eyebrow">BEST SELLERS</p><h2>Sản phẩm nổi bật</h2></div></div>
+    @if (!Model.FeaturedProducts.Any())
+    {
+        <p class="empty-message">Không có sản phẩm phù hợp.</p>
+    }
+    else
+    {
+        <div class="featured-scroll" aria-label="Danh sách 10 sản phẩm nổi bật">
+            @foreach (var product in Model.FeaturedProducts)
+            {
+                <div class="featured-item">@Html.Partial("~/Views/Shared/_ProductCard.cshtml", product)</div>
+            }
+        </div>
+    }
+</section>

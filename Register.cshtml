@@ -1,0 +1,61 @@
+@model MyStore.Models.ViewModel.RegisterVM
+@{
+    ViewBag.Title = "Đăng ký tài khoản";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+@section styles {
+    <link rel="stylesheet" href="@Url.Content("~/Content/myStyle/CustomerAccount.css")" />
+}
+
+<section class="account-page">
+    <div class="account-card account-card-wide">
+        <p class="eyebrow">MYSTORE / CUSTOMER ACCOUNT</p>
+        <h1>Đăng ký tài khoản</h1>
+        <p class="account-intro">Tạo tài khoản để lưu thông tin khách hàng và mua sắm thuận tiện hơn.</p>
+
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "account-form", autocomplete = "on" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "validation-summary" })
+            <div class="account-field-grid">
+                <div class="account-field">
+                    @Html.LabelFor(m => m.Username)
+                    @Html.TextBoxFor(m => m.Username, new { @class = "account-input", autocomplete = "username", maxlength = "255", required = "required" })
+                    @Html.ValidationMessageFor(m => m.Username, "", new { @class = "field-error" })
+                </div>
+                <div class="account-field">
+                    @Html.LabelFor(m => m.CustomerName)
+                    @Html.TextBoxFor(m => m.CustomerName, new { @class = "account-input", autocomplete = "name", required = "required" })
+                    @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "field-error" })
+                </div>
+                <div class="account-field">
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password, new { @class = "account-input", autocomplete = "new-password", minlength = "8", required = "required" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "field-error" })
+                </div>
+                <div class="account-field">
+                    @Html.LabelFor(m => m.ConfirmPassword)
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "account-input", autocomplete = "new-password", required = "required" })
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "field-error" })
+                </div>
+                <div class="account-field">
+                    @Html.LabelFor(m => m.CustomerPhone)
+                    @Html.TextBoxFor(m => m.CustomerPhone, new { @class = "account-input", autocomplete = "tel", required = "required", maxlength = "15" })
+                    @Html.ValidationMessageFor(m => m.CustomerPhone, "", new { @class = "field-error" })
+                </div>
+                <div class="account-field">
+                    @Html.LabelFor(m => m.CustomerEmail)
+                    @Html.TextBoxFor(m => m.CustomerEmail, new { @class = "account-input", type = "email", autocomplete = "email", required = "required" })
+                    @Html.ValidationMessageFor(m => m.CustomerEmail, "", new { @class = "field-error" })
+                </div>
+                <div class="account-field account-field-full">
+                    @Html.LabelFor(m => m.CustomerAddress)
+                    @Html.TextBoxFor(m => m.CustomerAddress, new { @class = "account-input", autocomplete = "street-address", required = "required" })
+                    @Html.ValidationMessageFor(m => m.CustomerAddress, "", new { @class = "field-error" })
+                </div>
+            </div>
+            <button type="submit" class="primary-button account-submit">Tạo tài khoản</button>
+        }
+        <p class="account-switch">Đã có tài khoản? <a href="@Url.Action("Login", "Account")">Đăng nhập</a></p>
+    </div>
+</section>

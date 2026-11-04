@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title - MyStore</title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/myStyle/CustomerHome.css")" />
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <div class="top-notice">MyStore · Chọn điều bạn yêu thích</div>
+    <header class="site-header">
+        <div class="container nav-bar">
+            <a class="brand" href="@Url.Action("Index", "Home")">MYSTORE<span>.</span></a>
+            <nav aria-label="Điều hướng chính" class="navigation">
+                <a href="@Url.Action("Index", "Home")">Trang chủ</a>
+                <a href="@Url.Action("Index", "Cart")">Giỏ hàng</a>
+                @if (Request.IsAuthenticated)
+                {
+                    <span class="nav-username">Xin chào, @User.Identity.Name</span>
+                    using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { @class = "logout-form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button class="logout-button" type="submit">Đăng xuất</button>
+                    }
+                }
+                else
+                {
+                    <a href="@Url.Action("Login", "Account")">Đăng nhập</a>
+                    <a href="@Url.Action("Register", "Account")">Đăng ký</a>
+                }
+            </nav>
+        </div>
+        <div class="container category-nav">@Html.Action("CategoryMenu", "Home")</div>
+    </header>
+    <main class="container page-content">
+        @if (TempData["Error"] != null)
+        {
+            <p class="alert-message">@TempData["Error"]</p>
+        }
+        @if (TempData["Success"] != null)
+        {
+            <p class="success-message">@TempData["Success"]</p>
+        }
+        @RenderBody()
+    </main>
+    <footer class="site-footer"><div class="container">© @DateTime.Now.Year MyStore · Bài thực hành ASP.NET MVC5</div></footer>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

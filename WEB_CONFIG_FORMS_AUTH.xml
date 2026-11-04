@@ -1,0 +1,7 @@
+<!-- MẪU ĐỂ GHÉP vào Web.config của dự án MVC5, KHÔNG thay thế toàn bộ Web.config. -->
+<!-- Chỉ thêm nội dung authentication vào <configuration><system.web> đã có. -->
+<authentication mode="Forms">
+  <!-- timeout tính bằng PHÚT: 60 = 1 giờ -->
+  <forms loginUrl="~/Account/Login" timeout="60" slidingExpiration="false" />
+</authentication>
+<!-- Khi triển khai HTTPS công khai: cấu hình requireSSL="true" và HTTPS toàn site. -->

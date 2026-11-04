@@ -1,0 +1,28 @@
+@using System.Linq
+@using PagedList
+@using PagedList.Mvc
+@model MyStore.Models.ViewModel.Cart
+
+@if (Model.SimilarProducts != null && Model.SimilarProducts.Any())
+{
+    <section class="product-section cart-similar" id="similar-products">
+        <div class="section-heading">
+            <p class="eyebrow">DISCOVER MORE</p>
+            <h2>Sản phẩm tương tự</h2>
+            <p class="muted-note">Gợi ý từ các danh mục sản phẩm đang có trong giỏ.</p>
+        </div>
+        <div class="product-grid">
+            @foreach (var product in Model.SimilarProducts)
+            {
+                @Html.Partial("~/Views/Shared/_ProductCard.cshtml", product)
+            }
+        </div>
+        @if (Model.SimilarProducts.PageCount > 1)
+        {
+            <div class="pagination">
+                @Html.PagedListPager(Model.SimilarProducts,
+                    page => Url.Action("Index", "Cart", new { page }))
+            </div>
+        }
+    </section>
+}

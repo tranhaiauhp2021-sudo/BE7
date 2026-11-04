@@ -1,0 +1,8 @@
+.detail-layout { display:grid; grid-template-columns:1fr 1fr; gap:45px; padding:18px 0 40px; }
+.detail-image { background:#f7f5f1; min-height:380px; display:flex; align-items:center; justify-content:center; }
+.detail-image img { max-height:430px; width:100%; object-fit:contain; padding:25px; }
+.detail-info h1 { font-size:clamp(30px,3.6vw,43px); margin:8px 0 20px; }
+.detail-price { font-size:27px; font-weight:700; color:#a36b4d; }.detail-desc { line-height:1.9; color:#666; }
+.sold-count,.subtotal-note { color:#888; font-size:13px; }.buy-form { border-top:1px solid #ece7e2; margin-top:20px; padding:21px 0; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.buy-form label { font-weight:600; }.buy-form input { border:1px solid #ccc; padding:10px; width:85px; font:inherit; }
+@media(max-width:760px){.detail-layout{grid-template-columns:1fr;gap:25px;}.detail-image{min-height:260px;}}

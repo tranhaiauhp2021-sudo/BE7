@@ -1,0 +1,21 @@
+@using System
+@model MyStore.Models.Product
+@{
+    var imagePath = string.IsNullOrWhiteSpace(Model.ProductImage)
+        ? "~/Content/images/product-placeholder.svg"
+        : Model.ProductImage;
+    var imageUrl = imagePath.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
+        || imagePath.StartsWith("https://", StringComparison.OrdinalIgnoreCase)
+        ? imagePath : Url.Content(imagePath.StartsWith("~/") ? imagePath : "~/" + imagePath.TrimStart('/'));
+}
+<article class="product-card">
+    <a class="product-image" href="@Url.Action("ProductDetail", "Home", new { id = Model.ProductID })">
+        <img src="@imageUrl" alt="Ảnh sản phẩm @Model.ProductName" loading="lazy" />
+    </a>
+    <div class="product-body">
+        <span class="category-mini">@(Model.Category == null ? "Sản phẩm" : Model.Category.CategoryName)</span>
+        <h3><a href="@Url.Action("ProductDetail", "Home", new { id = Model.ProductID })">@Model.ProductName</a></h3>
+        <p class="price">@Model.ProductPrice.ToString("N0") đ</p>
+        <a class="card-link" href="@Url.Action("ProductDetail", "Home", new { id = Model.ProductID })">Xem chi tiết →</a>
+    </div>
+</article>

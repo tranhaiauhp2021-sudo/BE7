@@ -1,0 +1,21 @@
+@model MyStore.Models.ViewModel.HomeProductVM
+@using PagedList.Mvc
+<section id="shop-products" class="product-section">
+    <div class="section-heading"><div><p class="eyebrow">DISCOVER MORE</p><h2>Sản phẩm mới</h2></div></div>
+    @if (Model.NewProducts.Count == 0)
+    {
+        <p class="empty-message">Không có sản phẩm phù hợp.</p>
+    }
+    else
+    {
+        <div class="product-grid">
+            @foreach (var product in Model.NewProducts)
+            {
+                @Html.Partial("~/Views/Shared/_ProductCard.cshtml", product)
+            }
+        </div>
+        <div class="pagination">
+            @Html.PagedListPager(Model.NewProducts, page => Url.Action("Index", "Home", new { page, searchTerm = Model.SearchTerm }))
+        </div>
+    }
+</section>

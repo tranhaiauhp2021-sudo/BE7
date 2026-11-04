@@ -1,0 +1,27 @@
+@model MyStore.Models.ViewModel.HomeProductVM
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+<section class="hero">
+    <div class="hero-content">
+        <p class="eyebrow">WELCOME TO MYSTORE</p>
+        <h1>Khám phá những sản phẩm bạn yêu thích</h1>
+        <p>Mua sắm trực tuyến dễ dàng với nhiều lựa chọn dành cho bạn.</p>
+        <a class="primary-button" href="#shop-products">Bắt đầu mua sắm</a>
+    </div>
+</section>
+<section class="search-section" aria-labelledby="search-title">
+    <h2 id="search-title">Tìm kiếm sản phẩm</h2>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "search-form" }))
+    {
+        @Html.TextBoxFor(m => m.SearchTerm, new {
+            placeholder = "Nhập tên, mô tả hoặc danh mục sản phẩm...",
+            @class = "search-input",
+            type = "search"
+        })
+        <button type="submit" class="primary-button">Tìm kiếm</button>
+    }
+</section>
+@Html.Partial("_PVFeatureProduct", Model)
+@Html.Partial("_PVNewProduct", Model)

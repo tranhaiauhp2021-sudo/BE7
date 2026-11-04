@@ -1,0 +1,51 @@
+@using System
+@model MyStore.Models.ViewModel.ProductDetailVM
+@{
+    ViewBag.Title = Model.Product.ProductName;
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    var rawImage = string.IsNullOrWhiteSpace(Model.Product.ProductImage)
+        ? "~/Content/images/product-placeholder.svg" : Model.Product.ProductImage;
+    var imageUrl = rawImage.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
+        || rawImage.StartsWith("https://", StringComparison.OrdinalIgnoreCase)
+        ? rawImage : Url.Content(rawImage.StartsWith("~/") ? rawImage : "~/" + rawImage.TrimStart('/'));
+}
+@section styles {
+    <link rel="stylesheet" href="@Url.Content("~/Content/myStyle/CustomerDetailProduct.css")" />
+}
+<div class="breadcrumb"><a href="@Url.Action("Index", "Home")">Trang chủ</a> / @Model.Product.ProductName</div>
+<section class="detail-layout">
+    <div class="detail-image"><img src="@imageUrl" alt="@Model.Product.ProductName" /></div>
+    <div class="detail-info">
+        <span class="eyebrow">@(Model.Product.Category?.CategoryName ?? "SẢN PHẨM")</span>
+        <h1>@Model.Product.ProductName</h1>
+        <p class="detail-price">@Model.Product.ProductPrice.ToString("N0") đ</p>
+        <p class="detail-desc">@Model.Product.ProductDescription</p>
+        <p class="sold-count">Đã bán (số lượt trong chi tiết đơn): @Model.Product.OrderDetails.Count()</p>
+        @using (Html.BeginForm("ProductDetail", "Home", FormMethod.Post, new { @class = "buy-form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("id", Model.Product.ProductID)
+            <label for="quantity">Số lượng</label>
+            <input id="quantity" name="quantity" type="number" value="1" min="1" max="100" required />
+            <button type="submit" class="primary-button">Thêm vào giỏ hàng</button>
+        }
+        <p class="subtotal-note">Tạm tính: <strong id="subtotal">@Model.Product.ProductPrice.ToString("N0") đ</strong></p>
+    </div>
+</section>
+@Html.Partial("_PVRelatedProduct", Model)
+@Html.Partial("_PVTopProduct", Model)
+
+@section scripts {
+<script>
+(function () {
+    var input = document.getElementById('quantity');
+    var subtotal = document.getElementById('subtotal');
+    var price = Number('@Model.Product.ProductPrice.ToString(System.Globalization.CultureInfo.InvariantCulture)');
+    if (!input || !subtotal) return;
+    input.addEventListener('input', function () {
+        var qty = Number(input.value) || 0;
+        subtotal.textContent = new Intl.NumberFormat('vi-VN').format(price * qty) + ' đ';
+    });
+}());
+</script>
+}

@@ -1,0 +1,17 @@
+@model MyStore.Models.ViewModel.ProductDetailVM
+<section class="product-section">
+    <div class="section-heading"><div><p class="eyebrow">YOU MAY ALSO LIKE</p><h2>Sản phẩm tương tự</h2></div></div>
+    @if (!Model.RelatedProducts.Any())
+    {
+        <p class="empty-message">Chưa có sản phẩm tương tự.</p>
+    }
+    else
+    {
+        <div class="featured-scroll">
+            @foreach (var product in Model.RelatedProducts)
+            {
+                <div class="featured-item">@Html.Partial("~/Views/Shared/_ProductCard.cshtml", product)</div>
+            }
+        </div>
+    }
+</section>
